@@ -1,3 +1,4 @@
+
 ## 1. Зарегистрировать приложение в Yandex 
 https://oauth.yandex.ru
 
