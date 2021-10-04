@@ -1,6 +1,6 @@
 <?php
 
-namespace ITPolice\PaymentSystems;
+namespace ITPolice\YandexDisk;
 
 use ITPolice\YandexDisk\YandexDiskAdapter;
 use Illuminate\Support\Facades\Storage;
