@@ -1,0 +1,28 @@
+{
+    "name": "it-police/laravel-yadisk-driver",
+    "description": "package usage yandex disk as filesystem driver",
+    "version": "1.0.0",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Marat Dimaev",
+            "email": "dimaevm@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "ITPolice\\YandexDisk\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ITPolice\\YandexDisk\\ServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "arhitector/yandex": "dev-master"
+    }
+}
