@@ -1,10 +1,11 @@
 
+# Использование
 
-## 1. Зарегистрировать приложение в Yandex 
-
-https://oauth.yandex.ru
+## 1. Зарегистрировать приложение в Yandex
 
 > включить Яндекс.Диск REST API
+
+https://oauth.yandex.ru
 
 ## 2. Получить токен
 `https://oauth.yandex.ru/authorize?response_type=token&client_id={ID приложения}`
