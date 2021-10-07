@@ -8,7 +8,8 @@
 https://oauth.yandex.ru
 
 ## 2. Получить токен
-`https://oauth.yandex.ru/authorize?response_type=token&client_id={ID приложения}`
+
+https://oauth.yandex.ru/authorize?response_type=token&client_id={ID_приложения}
 
 ## 3. Прописать настройки в .env 
 
@@ -28,16 +29,23 @@ YANDEX_DISK_BASE_PATH=storage/ - Путь к корневой папке Янд�
 
 ## 4. Примеры использования
 
-Автоматическая загрузка через Job и удаление из локального хранилища
-
-Пример файл расположен на сервере по пути `storage/app/public/files/1/filename1.png` (диск `public`)
-```
-$filePath = 'files/1/filename1.png';
-Helper::upload($filePath, `public`, `low`);
-```
-
 ```
 Storage::disk('yandex-disk')->exists('path/to/file.txt');
 Storage::disk('yandex-disk')->get('path/to/file.txt');
 Storage::disk('yandex-disk')->put('path/to/file.txt', 'file content ...');
+```
+
+Автоматическая загрузка через Job и удаление из локального хранилища
+
+> Пример файл расположен на сервере по пути `storage/app/public/files/1/filename1.png` (диск `public`)
+
+```
+$filePath = 'files/1/filename1.png';
+\ITPolice\YandexDisk\Helper::upload($filePath, `public`, `low`);
+```
+
+Команда для перемещения всех файлов из папки `public` в Яндекс диск
+
+```
+php artisan ya-disk:move-files
 ```

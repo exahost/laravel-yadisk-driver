@@ -2,7 +2,7 @@
 
 namespace ITPolice\YandexDisk;
 
-use ITPolice\YandexDisk\YandexDiskAdapter;
+use ITPolice\YandexDisk\Console\Commands\YandexDiskMoveFiles;
 use Illuminate\Support\Facades\Storage;
 use League\Flysystem\Filesystem;
 use Arhitector\Yandex\Disk;
@@ -21,7 +21,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
             return new Filesystem(new YandexDiskAdapter($client, $config['prefix']));
         });
 
-        app()->config['filesystems.disks.yandex-disk'] = [
+        $this->app->config['filesystems.disks.yandex-disk'] = [
             'driver' => 'yandex-disk',
             'token' => env('YANDEX_DISK_OAUTH_TOKEN'),
             'cacheTime' => env('YANDEX_DISK_CACHE_TIME', 900),
@@ -31,6 +31,11 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 
         if(config('filesystems.disks.yandex-disk.on')) {
             $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
+            if ($this->app->runningInConsole()) {
+                $this->commands([
+                    YandexDiskMoveFiles::class,
+                ]);
+            }
         }
     }
 }
