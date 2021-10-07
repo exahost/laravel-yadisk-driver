@@ -28,6 +28,14 @@ YANDEX_DISK_BASE_PATH=storage/ - Путь к корневой папке Янд�
 
 ## 4. Примеры использования
 
+Автоматическая загрузка через Job и удаление из локального хранилища
+
+Пример файл расположен на сервере по пути `storage/app/public/files/1/filename1.png` (диск `public`)
+```
+$filePath = 'files/1/filename1.png';
+Helper::upload($filePath, `public`, `low`);
+```
+
 ```
 Storage::disk('yandex-disk')->exists('path/to/file.txt');
 Storage::disk('yandex-disk')->get('path/to/file.txt');
