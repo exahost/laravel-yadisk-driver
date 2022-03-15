@@ -124,4 +124,52 @@ class Helper
             return $response;
         }
     }
+
+    /**
+     * Получить доп. св-ва файла
+     * @param string $path
+     * @param ...$props
+     * @return array
+     */
+    public static function getFileProperties(string $path, ...$props)
+    {
+        $result = [];
+        foreach ($props as $k) $result[$k] = null;
+        if (!empty($props)) {
+            $yaDisk = new \Arhitector\Yandex\Disk(config('filesystems.disks.yandex-disk.token'));
+
+            $yaPath = config('filesystems.disks.yandex-disk.prefix') . $path;
+            $resource = $yaDisk->getResource($yaPath);
+            $has = $resource->has();
+            if ($has) {
+                foreach ($props as $k) {
+                    $result[$k] = $resource->getProperty($k);
+                }
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * Сохранить доп. св-ва файла
+     * @param string $path
+     * @param $props
+     * @return void
+     */
+    public static function setFileProperties(string $path, $props = [])
+    {
+        if (!empty($props)) {
+            $yaDisk = new \Arhitector\Yandex\Disk(config('filesystems.disks.yandex-disk.token'));
+
+            $yaPath = config('filesystems.disks.yandex-disk.prefix') . $path;
+            $resource = $yaDisk->getResource($yaPath);
+            $has = $resource->has();
+            if ($has) {
+                foreach ($props as $k => $v) {
+                    $resource->set($k, $v);
+                }
+            }
+        }
+    }
 }
