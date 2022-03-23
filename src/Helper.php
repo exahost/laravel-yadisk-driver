@@ -115,6 +115,7 @@ class Helper
         $fileData = self::getFile($path);
         if ($fileData) {
             $mimeType = self::getFileMimeType($path);
+            $name = urlencode($name);
             $response = Response::make($fileData, 200);
             $response->header('Cache-Control', "public");
             $response->header('Content-Description', "File Transfer");
