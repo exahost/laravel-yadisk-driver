@@ -2,6 +2,8 @@
 
 namespace ITPolice\YandexDisk;
 
+use Illuminate\Console\Scheduling\Schedule;
+use ITPolice\YandexDisk\Console\Commands\YandexDiskClearTmpFiles;
 use ITPolice\YandexDisk\Console\Commands\YandexDiskMoveFiles;
 use Illuminate\Support\Facades\Storage;
 use League\Flysystem\Filesystem;
@@ -34,8 +36,18 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
             if ($this->app->runningInConsole()) {
                 $this->commands([
                     YandexDiskMoveFiles::class,
+                    YandexDiskClearTmpFiles::class,
                 ]);
             }
+
+            $this->app->booted(function () {
+                /**
+                 * @var Schedule $schedule
+                 */
+                $schedule = $this->app->make(Schedule::class);
+                $schedule->command('ya-disk:clear-tmp-files')->dailyAt('03:00');
+            });
+
         }
     }
 }
