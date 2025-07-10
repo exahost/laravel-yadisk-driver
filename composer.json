@@ -1,7 +1,7 @@
 {
     "name": "it-police/laravel-yadisk-driver",
     "description": "using the yandex disk package as a laravel file system driver",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "type": "library",
     "authors": [
         {
